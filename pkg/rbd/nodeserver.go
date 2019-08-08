@@ -110,8 +110,7 @@ func (ns *nodeServer) NodePublishVolume(ctx context.Context, req *csi.NodePublis
 	mountFlags := req.GetVolumeCapability().GetMount().GetMountFlags()
 
 	glog.V(4).Infof("target %v\nisBlock %v\nfstype %v\ndevice %v\nreadonly %v\nattributes %v\n mountflags %v\n",
-+		targetPath, isBlock, fsType, devicePath, readOnly, attrib, mountFlags)
- 
+		+targetPath, isBlock, fsType, devicePath, readOnly, attrib, mountFlags)
 
 	diskMounter := &mount.SafeFormatAndMount{Interface: ns.mounter, Exec: mount.NewOsExec()}
 	if isBlock {
@@ -128,7 +127,7 @@ func (ns *nodeServer) NodePublishVolume(ctx context.Context, req *csi.NodePublis
 		if err := diskMounter.FormatAndMount(devicePath, targetPath, fsType, options); err != nil {
 			return nil, err
 		}
- 
+
 	}
 
 	return &csi.NodePublishVolumeResponse{}, nil
